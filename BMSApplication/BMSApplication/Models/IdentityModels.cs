@@ -31,5 +31,15 @@ namespace BMSApplication.Models
         }
 
         public System.Data.Entity.DbSet<BMSApplication.Models.Supplier> Suppliers { get; set; }
+
+        public System.Data.Entity.DbSet<BMSApplication.Models.Item> Items { get; set; }
+
+        public System.Data.Entity.DbSet<BMSApplication.Models.Color> Colors { get; set; }
+
+        public System.Data.Entity.DbSet<BMSApplication.Models.Size> Sizes { get; set; }
+
+        public System.Data.Entity.DbSet<BMSApplication.Models.Sell_Price> Sell_Price { get; set; }
+
+        public System.Data.Entity.DbSet<BMSApplication.Models.Courier> Couriers { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace BMSApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Initial1 : IMigrationMetadata
+    public sealed partial class faiz4table : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(faiz4table));
         
         string IMigrationMetadata.Id
         {
-            get { return "201707301057015_Initial1"; }
+            get { return "201707310552184_faiz4table"; }
         }
         
         string IMigrationMetadata.Source
