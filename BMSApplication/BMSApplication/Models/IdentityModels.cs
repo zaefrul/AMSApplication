@@ -41,5 +41,13 @@ namespace BMSApplication.Models
         public System.Data.Entity.DbSet<BMSApplication.Models.Sell_Price> Sell_Price { get; set; }
 
         public System.Data.Entity.DbSet<BMSApplication.Models.Courier> Couriers { get; set; }
+
+        public System.Data.Entity.DbSet<BMSApplication.Models.Customer> Customers { get; set; }
+
+        public System.Data.Entity.DbSet<BMSApplication.Models.CSCategory> CSCategories { get; set; }
+
+        public System.Data.Entity.DbSet<BMSApplication.Models.Group> Groups { get; set; }
+
+        public System.Data.Entity.DbSet<BMSApplication.Models.Address> Addresses { get; set; }
     }
 }

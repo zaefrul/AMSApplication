@@ -13,44 +13,45 @@ using BMSApplication.Models;
 
 namespace BMSApplication.Controllers
 {
-    public class SuppliersController : ApiController
+    public class AddressesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/Suppliers
-        public IQueryable<Supplier> GetSuppliers()
+        // GET: api/Addresses
+        public IQueryable<Address> GetAddresses()
         {
-            return db.Suppliers;
+            return db.Addresses;
         }
 
-        // GET: api/Suppliers/5
-        [ResponseType(typeof(Supplier))]
-        public async Task<IHttpActionResult> GetSupplier(int id)
+        // GET: api/Addresses/5
+        [ResponseType(typeof(Address))]
+        public async Task<IHttpActionResult> GetAddress(int id)
         {
-            Supplier supplier = await db.Suppliers.FindAsync(id);
-            if (supplier == null)
+            Address address = await db.Addresses.FindAsync(id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            return Ok(supplier);
+            return Ok(address);
         }
 
-        // PUT: api/Suppliers/5
+        // PUT: api/Addresses/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutSupplier(int id, Supplier supplier)
+        public async Task<IHttpActionResult> PutAddress(int id, Address address)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != supplier.Id)
+            if (id != address.Id)
             {
                 return BadRequest();
             }
-
-            db.Entry(supplier).State = EntityState.Modified;
+            address.Modified = DateTime.Now;
+            address.ModifyBy = 2;
+            db.Entry(address).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +59,7 @@ namespace BMSApplication.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SupplierExists(id))
+                if (!AddressExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +72,38 @@ namespace BMSApplication.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Suppliers
-        [ResponseType(typeof(Supplier))]
-        public async Task<IHttpActionResult> PostSupplier(Supplier supplier)
+        // POST: api/Addresses
+        [ResponseType(typeof(Address))]
+        public async Task<IHttpActionResult> PostAddress(Address address)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            db.Suppliers.Add(supplier);
+            address.Modified = DateTime.Now;
+            address.ModifyBy = 1;
+            address.Created = DateTime.Now;
+            address.CreatedBy = 1;
+            db.Addresses.Add(address);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = supplier.Id }, supplier);
+            return CreatedAtRoute("DefaultApi", new { id = address.Id }, address);
         }
 
-        // DELETE: api/Suppliers/5
-        [ResponseType(typeof(Supplier))]
-        public async Task<IHttpActionResult> DeleteSupplier(int id)
+        // DELETE: api/Addresses/5
+        [ResponseType(typeof(Address))]
+        public async Task<IHttpActionResult> DeleteAddress(int id)
         {
-            Supplier supplier = await db.Suppliers.FindAsync(id);
-            if (supplier == null)
+            Address address = await db.Addresses.FindAsync(id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            db.Suppliers.Remove(supplier);
+            db.Addresses.Remove(address);
             await db.SaveChangesAsync();
 
-            return Ok(supplier);
+            return Ok(address);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +115,9 @@ namespace BMSApplication.Controllers
             base.Dispose(disposing);
         }
 
-        private bool SupplierExists(int id)
+        private bool AddressExists(int id)
         {
-            return db.Suppliers.Count(e => e.Id == id) > 0;
+            return db.Addresses.Count(e => e.Id == id) > 0;
         }
     }
 }

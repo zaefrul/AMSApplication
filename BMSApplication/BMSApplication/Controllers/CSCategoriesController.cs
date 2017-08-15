@@ -13,44 +13,44 @@ using BMSApplication.Models;
 
 namespace BMSApplication.Controllers
 {
-    public class SuppliersController : ApiController
+    public class CSCategoriesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/Suppliers
-        public IQueryable<Supplier> GetSuppliers()
+        // GET: api/CSCategories
+        public IQueryable<CSCategory> GetCSCategories()
         {
-            return db.Suppliers;
+            return db.CSCategories;
         }
 
-        // GET: api/Suppliers/5
-        [ResponseType(typeof(Supplier))]
-        public async Task<IHttpActionResult> GetSupplier(int id)
+        // GET: api/CSCategories/5
+        [ResponseType(typeof(CSCategory))]
+        public async Task<IHttpActionResult> GetCSCategory(int id)
         {
-            Supplier supplier = await db.Suppliers.FindAsync(id);
-            if (supplier == null)
+            CSCategory cSCategory = await db.CSCategories.FindAsync(id);
+            if (cSCategory == null)
             {
                 return NotFound();
             }
 
-            return Ok(supplier);
+            return Ok(cSCategory);
         }
 
-        // PUT: api/Suppliers/5
+        // PUT: api/CSCategories/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutSupplier(int id, Supplier supplier)
+        public async Task<IHttpActionResult> PutCSCategory(int id, CSCategory cSCategory)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != supplier.Id)
+            if (id != cSCategory.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(supplier).State = EntityState.Modified;
+            db.Entry(cSCategory).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace BMSApplication.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SupplierExists(id))
+                if (!CSCategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace BMSApplication.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Suppliers
-        [ResponseType(typeof(Supplier))]
-        public async Task<IHttpActionResult> PostSupplier(Supplier supplier)
+        // POST: api/CSCategories
+        [ResponseType(typeof(CSCategory))]
+        public async Task<IHttpActionResult> PostCSCategory(CSCategory cSCategory)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Suppliers.Add(supplier);
+            db.CSCategories.Add(cSCategory);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = supplier.Id }, supplier);
+            return CreatedAtRoute("DefaultApi", new { id = cSCategory.Id }, cSCategory);
         }
 
-        // DELETE: api/Suppliers/5
-        [ResponseType(typeof(Supplier))]
-        public async Task<IHttpActionResult> DeleteSupplier(int id)
+        // DELETE: api/CSCategories/5
+        [ResponseType(typeof(CSCategory))]
+        public async Task<IHttpActionResult> DeleteCSCategory(int id)
         {
-            Supplier supplier = await db.Suppliers.FindAsync(id);
-            if (supplier == null)
+            CSCategory cSCategory = await db.CSCategories.FindAsync(id);
+            if (cSCategory == null)
             {
                 return NotFound();
             }
 
-            db.Suppliers.Remove(supplier);
+            db.CSCategories.Remove(cSCategory);
             await db.SaveChangesAsync();
 
-            return Ok(supplier);
+            return Ok(cSCategory);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace BMSApplication.Controllers
             base.Dispose(disposing);
         }
 
-        private bool SupplierExists(int id)
+        private bool CSCategoryExists(int id)
         {
-            return db.Suppliers.Count(e => e.Id == id) > 0;
+            return db.CSCategories.Count(e => e.Id == id) > 0;
         }
     }
 }

@@ -17,6 +17,8 @@ namespace BMSApplication.Models
         public string Address { get; set; }
         public int Person { get; set; }
         public bool Status { get; set; }
+        public int CategoryId { get; set; }
+        public virtual CSCategory Category { get; set; }
         public int CreatedBy { get; set; }
         public DateTime Created { get; set; }
         public int ModifiedBy { get; set; }
